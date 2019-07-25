@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Image HorizontalAlignment="Left" Height="242" Margin="511,44,0,0" VerticalAlignment="Top" Width="214" Source="res/drawable/ditlefsen.jpg"/>
+
     </Grid>
 </Window>
