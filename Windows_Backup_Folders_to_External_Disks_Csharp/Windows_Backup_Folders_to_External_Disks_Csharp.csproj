@@ -97,5 +97,11 @@
   <ItemGroup>
     <Resource Include="res\drawable\ditlefsen.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_data_backup_white_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_data_backup_white_48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

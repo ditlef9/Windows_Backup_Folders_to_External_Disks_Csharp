@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Windows_Backup_Folders_to_External_Disks_Csharp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Image HorizontalAlignment="Left" Height="242" Margin="511,44,0,0" VerticalAlignment="Top" Width="214" Source="res/drawable/ditlefsen.jpg"/>
-
+        Title="MainWindow" Height="720" Width="1280">
+    <Grid Margin="0,0,0,0">
+        <StackPanel x:Name="stackPanelNavigation" HorizontalAlignment="Left" Height="690" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" Background="#FF292728"/>
+        <StackPanel x:Name="stackPanelTop" HorizontalAlignment="Left" Height="20" Margin="200,0,0,0" VerticalAlignment="Top" Width="1074" Background="#FFAF0435"/>
+        <StackPanel x:Name="stackPanelLogo" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="200" Background="#FFAF0435">
+            <Image  Source="res/icons/ic_data_backup_white_48.png" Width="30" Height="30" Margin="10,25,0,0" RenderTransformOrigin="-0.25,0.85" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
+        <Label Content="Windows Backup" HorizontalAlignment="Left" Margin="40,15,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.024,0.456" Foreground="White"/>
+        <Label Content="Folders to External Disks" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" FontSize="13" Foreground="White"/>
     </Grid>
 </Window>
