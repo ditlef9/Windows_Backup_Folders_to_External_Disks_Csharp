@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Windows_Backup_Folders_to_External_Disks_Csharp"
              mc:Ignorable="d" 
-             d:DesignHeight="670" d:DesignWidth="1074">
+             d:DesignHeight="670" d:DesignWidth="1050">
     <Grid>
         <Label Content="Backup Overview" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
 

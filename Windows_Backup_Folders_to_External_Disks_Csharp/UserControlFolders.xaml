@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Windows_Backup_Folders_to_External_Disks_Csharp"
              mc:Ignorable="d" 
-             d:DesignHeight="670" d:DesignWidth="1074">
+             d:DesignHeight="670" d:DesignWidth="1050">
     <Grid>
         <Label Content="Folders" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+        <Label x:Name="labelFoldersAbout" Content="All the folders added here will be taken backup of to external disks." HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.547,-1.039" FontSize="16"/>
+        <Label x:Name="labelFoldersAboutB" Content="To remove a folder just mark the row and click Delete on your keyboard." HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.547,-1.039" FontSize="16"/>
+        <Button x:Name="buttonAddFolder" Content="Add folder" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.509,1.99" FontSize="16" Click="Button_Click"/>
+
+
+        <DataGrid x:Name="dataGridFolders" HorizontalAlignment="Left" Width="1000" Height="519" Margin="10,141,0,0" VerticalAlignment="Top" SelectionChanged="DataGridFolders_SelectionChanged" FontSize="16"/>
+
 
     </Grid>
 </UserControl>

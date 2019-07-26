@@ -26,9 +26,10 @@
 
         <StackPanel x:Name="stackPanelNavigationActive" HorizontalAlignment="Left" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="5" Background="#FFAF0435" RenderTransformOrigin="1,-0.17"/>
         <DockPanel x:Name="dockPanelMain" HorizontalAlignment="Left" Width="1074" Height="670" LastChildFill="False" Margin="200,20,0,0" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" RenderTransformOrigin="0.5,0.5"  >
-            <local:UserControlDashboard x:Name="userControlDashboard" Height="670" VerticalAlignment="Top" Width="1074" Panel.ZIndex="0" />
-            <local:UserControlFolders x:Name="userControlFolders" Height="670" VerticalAlignment="Top" Width="1074" Panel.ZIndex="1" />
-            <local:UserControlBackupOverview x:Name="userControlBackupOverview" Height="670" VerticalAlignment="Top" Width="1074" Panel.ZIndex="2" />
+            <local:UserControlDashboard x:Name="userControlDashboard" Height="670" VerticalAlignment="Top" Width="1050" Margin="10,0,0,0" Panel.ZIndex="0" />
+            <local:UserControlFolders x:Name="userControlFolders" Height="670" VerticalAlignment="Top" Width="1050" Margin="10,0,0,0" Panel.ZIndex="1" />
+            <local:UserControlBackupOverview x:Name="userControlBackupOverview" Height="670" VerticalAlignment="Top" Width="1050" Margin="10,0,0,0" Panel.ZIndex="2" />
+       
         </DockPanel>
         <!-- //Navigation-->
 

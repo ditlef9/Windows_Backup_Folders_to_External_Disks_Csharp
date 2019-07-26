@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,34 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
         public MainWindow()
         {
             InitializeComponent();
+
+            createFoldersAndFiles();
         }
 
+        /*- Create folders and files ----------------------------------------------------- */
+        public void createFoldersAndFiles()
+        {
+            // Folder and file path
+            string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+            // Root
+            string folderPath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk";
+            if (!(Directory.Exists(folderPath)))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            // Config
+            folderPath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config";
+            if (!(Directory.Exists(folderPath)))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+
+        }
+
+        /*- Navigation --------------------------------------------------------------------- */
         private void ButtonNavigationDashboard_Click(object sender, RoutedEventArgs e)
         {
             collapseAllMainUserControls();
