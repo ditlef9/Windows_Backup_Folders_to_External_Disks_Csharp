@@ -6,13 +6,32 @@
         xmlns:local="clr-namespace:Windows_Backup_Folders_to_External_Disks_Csharp"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
-    <Grid Margin="0,0,0,0">
-        <StackPanel x:Name="stackPanelNavigation" HorizontalAlignment="Left" Height="690" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" Background="#FF292728"/>
-        <StackPanel x:Name="stackPanelTop" HorizontalAlignment="Left" Height="20" Margin="200,0,0,0" VerticalAlignment="Top" Width="1074" Background="#FFAF0435"/>
+    <Grid Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <DockPanel x:Name="dockPanelNavigation" HorizontalAlignment="Left" Height="690" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" Background="#FF292728"/>
+        <DockPanel x:Name="dockPanelTop" HorizontalAlignment="Left" Height="20" Margin="200,0,0,0" VerticalAlignment="Top" Width="1074" Background="#FFAF0435"/>
         <StackPanel x:Name="stackPanelLogo" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="200" Background="#FFAF0435">
             <Image  Source="res/icons/ic_data_backup_white_48.png" Width="30" Height="30" Margin="10,25,0,0" RenderTransformOrigin="-0.25,0.85" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
         <Label Content="Windows Backup" HorizontalAlignment="Left" Margin="40,15,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.024,0.456" Foreground="White"/>
         <Label Content="Folders to External Disks" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" FontSize="13" Foreground="White"/>
+        <!-- Navigation -->
+        <Button x:Name="buttonNavigationDashboard" Content="Dashboard" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationDashboard_Click"/>
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,110,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_dashboard_white_36dp.png" RenderTransformOrigin="0.424,0.844"/>
+
+        <Button x:Name="buttonNavigationFolders" Content="Folders" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationFolders_Click"/>
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,147,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_perm_media_white_36dp.png" />
+
+        <Button x:Name="buttonNavigationBackupOverview" Content="Backup overview" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationOverview_Click"/>
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,187,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_chrome_reader_mode_white_36dp.png" />
+
+        <StackPanel x:Name="stackPanelNavigationActive" HorizontalAlignment="Left" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="5" Background="#FFAF0435" RenderTransformOrigin="1,-0.17"/>
+        <DockPanel x:Name="dockPanelMain" HorizontalAlignment="Left" Width="1074" Height="670" LastChildFill="False" Margin="200,20,0,0" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" RenderTransformOrigin="0.5,0.5"  >
+            <local:UserControlDashboard x:Name="userControlDashboard" Height="670" VerticalAlignment="Top" Width="1074" Panel.ZIndex="0" />
+            <local:UserControlFolders x:Name="userControlFolders" Height="670" VerticalAlignment="Top" Width="1074" Panel.ZIndex="1" />
+            <local:UserControlBackupOverview x:Name="userControlBackupOverview" Height="670" VerticalAlignment="Top" Width="1074" Panel.ZIndex="2" />
+        </DockPanel>
+        <!-- //Navigation-->
+
+
     </Grid>
 </Window>

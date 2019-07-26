@@ -24,5 +24,33 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
         {
             InitializeComponent();
         }
+
+        private void ButtonNavigationDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            collapseAllMainUserControls();
+            stackPanelNavigationActive.Margin = new System.Windows.Thickness { Top = 100 };
+            userControlDashboard.Visibility = Visibility.Visible;
+        }
+
+        private void ButtonNavigationFolders_Click(object sender, RoutedEventArgs e)
+        {
+            collapseAllMainUserControls();
+            stackPanelNavigationActive.Margin = new System.Windows.Thickness { Top = 140 };
+            userControlFolders.Visibility = Visibility.Visible;
+        }
+
+        private void ButtonNavigationOverview_Click(object sender, RoutedEventArgs e)
+        {
+            collapseAllMainUserControls();
+            stackPanelNavigationActive.Margin = new System.Windows.Thickness { Top = 180 };
+            userControlBackupOverview.Visibility = Visibility.Visible;
+        }
+
+        private void collapseAllMainUserControls()
+        {
+            userControlDashboard.Visibility = Visibility.Collapsed;
+            userControlFolders.Visibility = Visibility.Collapsed;
+            userControlBackupOverview.Visibility = Visibility.Collapsed;
+        }
     }
 }

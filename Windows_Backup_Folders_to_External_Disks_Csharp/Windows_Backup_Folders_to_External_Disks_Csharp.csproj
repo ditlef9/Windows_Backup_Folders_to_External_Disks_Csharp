@@ -55,6 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControlBackupOverview.xaml.cs">
+      <DependentUpon>UserControlBackupOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlDashboard.xaml.cs">
+      <DependentUpon>UserControlDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlFolders.xaml.cs">
+      <DependentUpon>UserControlFolders.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +76,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControlBackupOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlFolders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -102,6 +123,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\icons\ic_data_backup_white_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_home_white_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_home_white_18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_home_white_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_perm_media_white_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_perm_media_white_36dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_dashboard_white_36dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_chrome_reader_mode_white_36dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
