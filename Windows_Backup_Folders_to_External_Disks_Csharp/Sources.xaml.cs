@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -15,22 +16,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Microsoft.WindowsAPICodePack.Dialogs;
-
 namespace Windows_Backup_Folders_to_External_Disks_Csharp
 {
     /// <summary>
-    /// Interaction logic for UserControlFolders.xaml
+    /// Interaction logic for Sources.xaml
     /// </summary>
-    public partial class UserControlFolders : UserControl
+    public partial class Sources : UserControl
     {
         private string currentDirectory;
-        List<Paragraph> buttonActionDeleteList = new List<Paragraph>();
-
-        public UserControlFolders()
+        public Sources()
         {
             InitializeComponent();
-
             // Update folder lists
             updateDataGridFolders();
         }
@@ -63,7 +59,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
                 // Folder and file path
                 string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "folders.txt";
+                string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sources.txt";
 
                 // Read file (look for existing folders)
                 if (File.Exists(filePath))
@@ -75,11 +71,11 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
                 // Write to file
                 File.WriteAllText(filePath, inputToFile);
 
-                // Update folderCount.txt
+                // Update foldersCount.txt
                 string[] stringSeparators = new string[] { "\n" };
                 string[] array = inputToFile.Split(stringSeparators, StringSplitOptions.None);
 
-                string filePathfolderCount = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "folderCount.txt";
+                string filePathfolderCount = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sourcesCount.txt";
                 File.WriteAllText(filePathfolderCount, array.Length.ToString());
             }
 
@@ -98,7 +94,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
             // Read file
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "folders.txt";
+            string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sources.txt";
             if (File.Exists(filePath))
             {
 
@@ -127,9 +123,9 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
                 } //foreach 
 
 
-                // Create folderCount.txt
-                string filePathfolderCount = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "folderCount.txt";
-                File.WriteAllText(filePathfolderCount, countFolders.ToString());
+                // Create sourcesCount.txt
+                string filePathfoldersCount = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sourcesCount.txt";
+                File.WriteAllText(filePathfoldersCount, countFolders.ToString());
 
             } // file exists
 
@@ -147,6 +143,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
             // Loop trough dataGridSender;
             String inputFolders = "";
+            int counter = 0;
             foreach (System.Data.DataRowView dataRow in dataGridSender.ItemsSource)
             {
                 String folderName = dataRow[0].ToString();
@@ -161,21 +158,23 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
                         inputFolders = inputFolders + "\n" + folderName;
                     }
 
-
+                    counter++;
                 } // folder name not null
 
             } // foreach data grid
 
             // Write to folders.txt
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "folders.txt";
+            string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sources.txt";
             File.WriteAllText(filePath, inputFolders);
+
+
+            // Update sourcesCount.txt
+            string filePathCount = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sourcesCount.txt";
+            File.WriteAllText(filePathCount, counter.ToString());
 
 
         } // DataGridFolders_SelectionChanged
     }
-
-
-
 
 }

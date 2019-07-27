@@ -48,6 +48,12 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
                 Directory.CreateDirectory(folderPath);
             }
 
+            // targetsSettings.txt
+            string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "targetsSettings.txt";
+            if (!(File.Exists(filePath))) { 
+                    String input = "prefix = H\nlast_disk_counter = 1";
+                    File.WriteAllText(filePath, input);
+            }
 
         }
 
@@ -59,25 +65,36 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
             userControlDashboard.Visibility = Visibility.Visible;
         }
 
-        private void ButtonNavigationFolders_Click(object sender, RoutedEventArgs e)
+        private void ButtonNavigationTargets_Click(object sender, RoutedEventArgs e)
         {
+
             collapseAllMainUserControls();
             stackPanelNavigationActive.Margin = new System.Windows.Thickness { Top = 140 };
-            userControlFolders.Visibility = Visibility.Visible;
+            userControlTargets.Visibility = Visibility.Visible;
         }
-
-        private void ButtonNavigationOverview_Click(object sender, RoutedEventArgs e)
+        private void ButtonNavigationSources_Click(object sender, RoutedEventArgs e)
         {
             collapseAllMainUserControls();
             stackPanelNavigationActive.Margin = new System.Windows.Thickness { Top = 180 };
+            userControlSources.Visibility = Visibility.Visible;
+
+        }
+        private void ButtonNavigationOverview_Click(object sender, RoutedEventArgs e)
+        {
+            collapseAllMainUserControls();
+            stackPanelNavigationActive.Margin = new System.Windows.Thickness { Top = 220 };
             userControlBackupOverview.Visibility = Visibility.Visible;
         }
 
-        private void collapseAllMainUserControls()
+
+        public void collapseAllMainUserControls()
         {
             userControlDashboard.Visibility = Visibility.Collapsed;
-            userControlFolders.Visibility = Visibility.Collapsed;
+            userControlTargets.Visibility = Visibility.Collapsed;
+            userControlSources.Visibility = Visibility.Collapsed;
             userControlBackupOverview.Visibility = Visibility.Collapsed;
+           
         }
+
     }
 }

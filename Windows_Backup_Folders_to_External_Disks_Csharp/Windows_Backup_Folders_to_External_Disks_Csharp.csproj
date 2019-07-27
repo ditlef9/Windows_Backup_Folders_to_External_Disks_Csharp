@@ -61,15 +61,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserControlBackupOverview.xaml.cs">
-      <DependentUpon>UserControlBackupOverview.xaml</DependentUpon>
+    <Compile Include="BackupOverview.xaml.cs">
+      <DependentUpon>BackupOverview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlDashboard.xaml.cs">
-      <DependentUpon>UserControlDashboard.xaml</DependentUpon>
+    <Compile Include="Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlFolders.xaml.cs">
-      <DependentUpon>UserControlFolders.xaml</DependentUpon>
+    <Compile Include="Sources.xaml.cs">
+      <DependentUpon>Sources.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Targets.xaml.cs">
+      <DependentUpon>Targets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TargetsIndex.xaml.cs">
+      <DependentUpon>TargetsIndex.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TargetsSettings.xaml.cs">
+      <DependentUpon>TargetsSettings.xaml</DependentUpon>
+    </Compile>
+    <Page Include="BackupOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,15 +99,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControlBackupOverview.xaml">
+    <Page Include="Sources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlDashboard.xaml">
+    <Page Include="Targets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlFolders.xaml">
+    <Page Include="TargetsIndex.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TargetsSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +172,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\icons\ic_chrome_reader_mode_white_36dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_important_devices_white_24dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\ic_important_devices_white_36dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\dialog_error.png" />
+    <Resource Include="res\icons\dialog_information.png" />
+    <Resource Include="res\icons\dialog_warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

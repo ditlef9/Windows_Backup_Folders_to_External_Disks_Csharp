@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Windows_Backup_Folders_to_External_Disks_Csharp.TargetsIndex"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Windows_Backup_Folders_to_External_Disks_Csharp"
+             mc:Ignorable="d" 
+          d:DesignHeight="670" d:DesignWidth="1050">
+    <Grid>
+        <Label Content="Target" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <Label x:Name="labelTargetAbout" Content="Target is where the backup will be saved, example D: and E:." HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.547,-1.039" FontSize="16"/>
+        <Label x:Name="labelTargetAboutB" Content="To remove a target just mark the row and click Delete on your keyboard." HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.547,-1.039" FontSize="16"/>
+        <Button x:Name="buttonAddTarget" Content="Add target" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.509,1.99" FontSize="16" Click="ButtonAddTarget_Click" />
+
+
+
+        <DataGrid x:Name="dataGridTargets" HorizontalAlignment="Left" Width="1000" Height="519" Margin="10,141,0,0" VerticalAlignment="Top" FontSize="16" SelectionChanged="DataGridTargets_SelectionChanged" />
+
+
+    </Grid>
+</UserControl>

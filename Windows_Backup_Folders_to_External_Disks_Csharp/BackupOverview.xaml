@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Windows_Backup_Folders_to_External_Disks_Csharp.UserControlBackupOverview"
+﻿<UserControl x:Class="Windows_Backup_Folders_to_External_Disks_Csharp.BackupOverview"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

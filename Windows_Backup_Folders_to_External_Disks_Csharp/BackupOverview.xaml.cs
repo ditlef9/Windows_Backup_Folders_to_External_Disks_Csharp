@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Windows_Backup_Folders_to_External_Disks_Csharp
 {
     /// <summary>
-    /// Interaction logic for UserControlDashboard.xaml
+    /// Interaction logic for BackupOverview.xaml
     /// </summary>
-    public partial class UserControlDashboard : UserControl
+    public partial class BackupOverview : UserControl
     {
-        public UserControlDashboard()
+        public BackupOverview()
         {
             InitializeComponent();
         }

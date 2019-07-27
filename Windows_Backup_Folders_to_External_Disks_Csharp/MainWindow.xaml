@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
     <Grid Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        
+        <!-- Left -->
         <DockPanel x:Name="dockPanelNavigation" HorizontalAlignment="Left" Height="690" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" Background="#FF292728"/>
         <DockPanel x:Name="dockPanelTop" HorizontalAlignment="Left" Height="20" Margin="200,0,0,0" VerticalAlignment="Top" Width="1074" Background="#FFAF0435"/>
         <StackPanel x:Name="stackPanelLogo" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="200" Background="#FFAF0435">
@@ -14,22 +16,27 @@
         </StackPanel>
         <Label Content="Windows Backup" HorizontalAlignment="Left" Margin="40,15,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.024,0.456" Foreground="White"/>
         <Label Content="Folders to External Disks" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" FontSize="13" Foreground="White"/>
+        <!-- //Left -->
+        
         <!-- Navigation -->
         <Button x:Name="buttonNavigationDashboard" Content="Dashboard" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationDashboard_Click"/>
         <Image HorizontalAlignment="Left" Height="20" Margin="15,110,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_dashboard_white_36dp.png" RenderTransformOrigin="0.424,0.844"/>
 
-        <Button x:Name="buttonNavigationFolders" Content="Folders" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationFolders_Click"/>
-        <Image HorizontalAlignment="Left" Height="20" Margin="15,147,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_perm_media_white_36dp.png" />
+        <Button x:Name="buttonNavigationTargets" Content="Targets" HorizontalAlignment="Left" Margin="0,140,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationTargets_Click" />
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,147,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_important_devices_white_36dp.png" />
 
-        <Button x:Name="buttonNavigationBackupOverview" Content="Backup overview" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationOverview_Click"/>
-        <Image HorizontalAlignment="Left" Height="20" Margin="15,187,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_chrome_reader_mode_white_36dp.png" />
+        <Button x:Name="buttonNavigationSources" Content="Sources" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationSources_Click" />
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,187,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_perm_media_white_36dp.png" />
+
+        <Button x:Name="buttonNavigationBackupOverview" Content="Backup overview" HorizontalAlignment="Left" Margin="0,220,0,0" VerticalAlignment="Top" Width="200" Height="35" Background="#FF292728" Foreground="White" FontFamily="Century Gothic" BorderBrush="#FF292728" HorizontalContentAlignment="Left" Padding="40,0,0,0" FontSize="16" Click="ButtonNavigationOverview_Click"/>
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,227,0,0" VerticalAlignment="Top" Width="20" Source="res/icons/ic_chrome_reader_mode_white_36dp.png" />
 
         <StackPanel x:Name="stackPanelNavigationActive" HorizontalAlignment="Left" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="5" Background="#FFAF0435" RenderTransformOrigin="1,-0.17"/>
         <DockPanel x:Name="dockPanelMain" HorizontalAlignment="Left" Width="1074" Height="670" LastChildFill="False" Margin="200,20,0,0" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" RenderTransformOrigin="0.5,0.5"  >
-            <local:UserControlDashboard x:Name="userControlDashboard" Height="670" VerticalAlignment="Top" Width="1050" Margin="10,0,0,0" Panel.ZIndex="0" />
-            <local:UserControlFolders x:Name="userControlFolders" Height="670" VerticalAlignment="Top" Width="1050" Margin="10,0,0,0" Panel.ZIndex="1" />
-            <local:UserControlBackupOverview x:Name="userControlBackupOverview" Height="670" VerticalAlignment="Top" Width="1050" Margin="10,0,0,0" Panel.ZIndex="2" />
-       
+            <local:Dashboard x:Name="userControlDashboard" Width="1050" Height="670" VerticalAlignment="Top"  Margin="10,0,0,0" Panel.ZIndex="0" />
+            <local:Targets x:Name="userControlTargets" Width="1050" Height="670" VerticalAlignment="Top"  Margin="10,0,0,0" Panel.ZIndex="1" />
+            <local:Sources x:Name="userControlSources" Width="1050" Height="670" VerticalAlignment="Top"  Margin="10,0,0,0" Panel.ZIndex="2" />
+            <local:BackupOverview x:Name="userControlBackupOverview" Width="1050" Height="670" VerticalAlignment="Top"  Margin="10,0,0,0" Panel.ZIndex="3" />
         </DockPanel>
         <!-- //Navigation-->
 
