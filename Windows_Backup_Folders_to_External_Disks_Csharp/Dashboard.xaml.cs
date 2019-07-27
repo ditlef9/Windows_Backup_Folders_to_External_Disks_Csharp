@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -27,7 +29,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
         public Dashboard()
         {
             InitializeComponent();
-
+            dataGridDashboardLog();
 
         }
 
@@ -55,7 +57,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
             DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
 
 
@@ -72,6 +74,10 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            // Path
+            string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+            // Status
             int currentSecond = DateTime.Now.Second;
             if (currentSecond == 1 || currentSecond == 6 | currentSecond == 11 || currentSecond == 16 | currentSecond == 21 || currentSecond == 26 | currentSecond == 31 || currentSecond == 36 | currentSecond == 41 || currentSecond == 46 | currentSecond == 51 || currentSecond == 56)
             {
@@ -93,6 +99,168 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
             {
                 labelDashboardStatus.Content = "Running" + "....";
             }
-        }
+
+
+
+            // Look for directories and files
+            string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sources.txt";
+            if (File.Exists(filePath))
+            {
+
+                // Read file
+                string readSources = System.IO.File.ReadAllText(filePath);
+                string[] stringSeparators = new string[] { "\n" };
+                string[] sourcesArray = readSources.Split(stringSeparators, StringSplitOptions.None);
+
+                // Loop trough file
+                foreach (string sourcePath in sourcesArray)
+                {
+                    if (!(sourcePath.Equals("")) && Directory.Exists(sourcePath))
+                    {
+                        // Make list of folders inside source, example \\10.0.0.1\speilfiler\x and  \\10.0.0.1\speilfiler\y
+                        String sourcePathCleanName = sourcePath; // sourcePath = \\10.0.0.1
+                        sourcePathCleanName = sourcePathCleanName.Replace("\\", "");
+                        sourcePathCleanName = sourcePathCleanName.Replace(":", "");
+
+                        
+
+                        string filePathCurrentSource = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "sourcesDirectories" + sourcePathCleanName + ".txt";
+                        String inputDirectories = "";
+
+                        // Loop trough folder
+                        string[] directoriesEntries = Directory.GetDirectories(sourcePath);
+                        foreach (string currentRootDirectory in directoriesEntries)
+                        {
+                            // Do something with fileName
+                            if (inputDirectories.Equals(""))
+                            {
+                                inputDirectories = currentRootDirectory;
+                            }
+                            else
+                            {
+                                inputDirectories = inputDirectories + "\n" + currentRootDirectory;
+                            }
+
+                            // We are now in \\10.0.0.1\speilfiler\x
+                            // Loop trough directory and check for files
+                            string[] filesEntries = Directory.GetFiles(currentRootDirectory, "*", SearchOption.AllDirectories);
+                            foreach (string files in filesEntries)
+                            {
+                                inputDirectories = inputDirectories + "\n - " + files;
+
+
+                                // Check if file is copied
+                                String cleanFile = files;
+                                cleanFile = cleanFile.Replace("\\", "");
+                                cleanFile = cleanFile.Replace(":", "");
+
+                                String copyFile = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "backupCompleted" + "\\" + cleanFile + ".temp";
+                                if (!(File.Exists(copyFile)))
+                                {
+                                    // Make copy
+                                    backupFile(files);
+
+                                    // Write to log
+                                    // [disk] [case number] [files]
+                                    String logFile = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "log.txt";
+                                    string readLog = "";
+                                    if (File.Exists(logFile))
+                                    {
+                                        readLog = System.IO.File.ReadAllText(logFile);
+                                    }
+                                    String datetime = DateTime.Now.ToString("dd MMMM yyyy HH:mm:ss");
+                                    String inputLog = datetime + "|" + currentRootDirectory + "|" + files + "\n" + readLog;
+                                    File.WriteAllText(logFile, inputLog);
+
+                                    // Make copyfile
+                                    File.WriteAllText(copyFile, "");
+
+
+                                    // Update folder lists
+                                    dataGridDashboardLog();
+
+                                } // copy doesnt exist
+                            }
+                        }
+                        File.WriteAllText(filePathCurrentSource, inputDirectories);
+
+
+                    } // sourceName
+                } // foreach sources
+            } // if source exits
+
+
+        } // dispatcherTimer_Tick
+
+
+        /*- Data grid dashboard log ------------------------------------------------------------------- */
+        /* Will show log in dashboard */
+        public void dataGridDashboardLog()
+        {
+
+            DataTable dt = new DataTable();
+            DataColumn dataColumnDatetime = new DataColumn("Date time", typeof(string));
+            DataColumn dataColumnDirectory = new DataColumn("Directory", typeof(string));
+            DataColumn dataColumnFile = new DataColumn("File", typeof(string));
+
+            dt.Columns.Add(dataColumnDatetime);
+            dt.Columns.Add(dataColumnDirectory);
+            dt.Columns.Add(dataColumnFile);
+
+            // Read file
+            string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "log.txt";
+            if (File.Exists(filePath))
+            {
+
+                // Read file
+                string existingFolders = System.IO.File.ReadAllText(filePath);
+                string[] stringSeparators = new string[] { "\n" };
+                string[] existsingFoldersArray = existingFolders.Split(stringSeparators, StringSplitOptions.None);
+
+                // Loop trough file
+                String lastDirectory = "";
+                foreach (string line in existsingFoldersArray)
+                {
+                    if (!(line.Equals("")))
+                    {
+
+                        string[] stringLineSeparators = new string[] { "|" };
+                        string[] lineArray = line.Split(stringLineSeparators, StringSplitOptions.None);
+
+
+                        DataRow dataRow = dt.NewRow();
+                        dataRow[0] = lineArray[0]; // Datetime
+                        dataRow[1] = lineArray[1]; // Directory
+                        dataRow[2] = lineArray[2].Replace(dataRow[1].ToString(), ""); // File
+
+                        if (lastDirectory.Equals(dataRow[1].ToString()))
+                        {
+                            dataRow[1] = "";
+                        }
+                    
+                        // Add
+                        dt.Rows.Add(dataRow);
+
+                        // Last directory
+                        lastDirectory = dataRow[1].ToString();
+                    } // not empty
+                } //foreach 
+
+
+            } // file exists
+
+            // Add data to data grid
+            dataGridDashboardLogContent.ItemsSource = dt.DefaultView;
+
+
+        } // dataGridDashboardLog
+
+        /*- Backup file ----------------------------------------------------------------- */
+        private void backupFile(string files)
+        {
+            throw new NotImplementedException();
+        } // backupFile
+
     }
 }

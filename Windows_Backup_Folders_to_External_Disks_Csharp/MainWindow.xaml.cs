@@ -55,6 +55,13 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
                     File.WriteAllText(filePath, input);
             }
 
+            // BackupCompleted
+            folderPath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "backupCompleted";
+            if (!(Directory.Exists(folderPath)))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
         }
 
         /*- Navigation --------------------------------------------------------------------- */

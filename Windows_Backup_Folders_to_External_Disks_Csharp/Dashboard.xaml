@@ -13,7 +13,7 @@
         <Button x:Name="buttonStart" Content="Start" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.509,1.99" FontSize="16" Click="ButtonStart_Click" />
 
 
-        <DataGrid x:Name="dataGridDashboard" HorizontalAlignment="Left" Width="1000" Height="519" Margin="10,141,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <DataGrid x:Name="dataGridDashboardLogContent" HorizontalAlignment="Left" Width="1000" Height="519" Margin="10,141,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="labelDashboardStatus" Content="" HorizontalAlignment="Left" Margin="136,98,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.542,-0.049"/>
 
     </Grid>
