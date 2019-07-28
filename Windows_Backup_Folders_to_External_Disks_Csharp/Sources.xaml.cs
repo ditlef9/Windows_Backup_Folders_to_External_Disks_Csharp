@@ -175,6 +175,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
 
         } // DataGridFolders_SelectionChanged
+
     }
 
 }

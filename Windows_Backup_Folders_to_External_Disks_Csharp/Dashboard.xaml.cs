@@ -29,8 +29,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
         public Dashboard()
         {
             InitializeComponent();
-            dataGridDashboardLog();
-
+            drawLogTable();
         }
 
         /*- Start/Stop backup process -------------------------------------------------------- */
@@ -177,7 +176,7 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
 
                                     // Update folder lists
-                                    dataGridDashboardLog();
+                                    drawLogTable();
 
                                 } // copy doesnt exist
                             }
@@ -193,25 +192,51 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
         } // dispatcherTimer_Tick
 
 
-        /*- Data grid dashboard log ------------------------------------------------------------------- */
-        /* Will show log in dashboard */
-        public void dataGridDashboardLog()
+
+        /*- Backup file ----------------------------------------------------------------- */
+        private void backupFile(string files)
         {
+            throw new NotImplementedException();
+        } // backupFile
 
-            DataTable dt = new DataTable();
-            DataColumn dataColumnDatetime = new DataColumn("Date time", typeof(string));
-            DataColumn dataColumnDirectory = new DataColumn("Directory", typeof(string));
-            DataColumn dataColumnFile = new DataColumn("File", typeof(string));
+        /*- Draw log table ---------------------------------------------------------------------- */
+        private void drawLogTable() {
 
-            dt.Columns.Add(dataColumnDatetime);
-            dt.Columns.Add(dataColumnDirectory);
-            dt.Columns.Add(dataColumnFile);
 
-            // Read file
+            Table oTable = new Table();
+
+
+            // Create n columns and add them to the table's Columns collection.
+            int numberOfColumns = 3;
+            for (int x = 0; x < numberOfColumns; x++){
+                oTable.Columns.Add(new TableColumn());
+            }
+
+            // Create and add an empty TableRowGroup Rows.
+            oTable.RowGroups.Add(new TableRowGroup());
+
+            // Add the table head row.
+            oTable.RowGroups[0].Rows.Add(new TableRow());
+
+            // Configure the table head row
+            TableRow currentRow = oTable.RowGroups[0].Rows[0];
+            var brushConverter = new BrushConverter();
+            currentRow.Background = (Brush)brushConverter.ConvertFrom("#FFe2e2e2"); // grey background
+            currentRow.Foreground = (Brush)brushConverter.ConvertFrom("#FF000000"); // black text
+            currentRow.FontFamily = new FontFamily("Segoe UI"); ;
+            currentRow.FontSize = 16;
+            currentRow.FontWeight = FontWeights.Bold;
+
+
+            // Add the header row with content,
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Date time"))));
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Directory"))));
+            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("File"))));
+
+            // Read file and add rows
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string filePath = userPath + "\\" + "WindowsBackupFoldersToExternalDisk" + "\\" + "config" + "\\" + "log.txt";
-            if (File.Exists(filePath))
-            {
+            if (File.Exists(filePath)) {
 
                 // Read file
                 string existingFolders = System.IO.File.ReadAllText(filePath);
@@ -220,47 +245,64 @@ namespace Windows_Backup_Folders_to_External_Disks_Csharp
 
                 // Loop trough file
                 String lastDirectory = "";
+                int countLines = 1;
+
+                Brush brushEven = (Brush)brushConverter.ConvertFrom("#FFf3f3f3"); // grey background
+                Brush brushOdd = (Brush)brushConverter.ConvertFrom("#FFf8f8f8"); // grey background
+                String styleHandler = "even";
                 foreach (string line in existsingFoldersArray)
                 {
-                    if (!(line.Equals("")))
-                    {
+                    if (!(line.Equals(""))) {
 
                         string[] stringLineSeparators = new string[] { "|" };
                         string[] lineArray = line.Split(stringLineSeparators, StringSplitOptions.None);
 
+                        String dateTime  = lineArray[0]; // Datetime
+                        String directory = lineArray[1]; // Directory
+                        String file      = lineArray[2].Replace(directory.ToString(), ""); // File
 
-                        DataRow dataRow = dt.NewRow();
-                        dataRow[0] = lineArray[0]; // Datetime
-                        dataRow[1] = lineArray[1]; // Directory
-                        dataRow[2] = lineArray[2].Replace(dataRow[1].ToString(), ""); // File
-
-                        if (lastDirectory.Equals(dataRow[1].ToString()))
+                        if (lastDirectory.Equals(directory.ToString()))
                         {
-                            dataRow[1] = "";
+                            directory = "";
                         }
-                    
-                        // Add
-                        dt.Rows.Add(dataRow);
+
+                        // Add new row
+                        oTable.RowGroups[0].Rows.Add(new TableRow());
+                        currentRow = oTable.RowGroups[0].Rows[countLines];
+
+                        //Configure the row layout
+                        if (styleHandler.Equals("odd")){
+                            currentRow.Background = brushOdd;
+                            styleHandler = "even";
+                        }
+                        else { 
+                            currentRow.Background = brushEven;
+                            styleHandler = "odd";
+                        }
+                        currentRow.FontFamily = new FontFamily("Segoe UI"); ;
+                        currentRow.FontSize = 16;
+
+                        //Add the country name in the first cell
+                        currentRow.Cells.Add(new TableCell(new Paragraph(new Run(dateTime))));
+                        currentRow.Cells.Add(new TableCell(new Paragraph(new Run(directory))));
+                        currentRow.Cells.Add(new TableCell(new Paragraph(new Run(file))));
+
 
                         // Last directory
-                        lastDirectory = dataRow[1].ToString();
+                        lastDirectory = directory;
+                        countLines = countLines+1;
                     } // not empty
                 } //foreach 
 
 
             } // file exists
 
-            // Add data to data grid
-            dataGridDashboardLogContent.ItemsSource = dt.DefaultView;
 
+            //Add the given flow document to the window
+            FlowDocument flowDocument = new FlowDocument();
+            flowDocument.Blocks.Add(oTable);
+            contentControlDashboardLog.Content = flowDocument;
 
-        } // dataGridDashboardLog
-
-        /*- Backup file ----------------------------------------------------------------- */
-        private void backupFile(string files)
-        {
-            throw new NotImplementedException();
-        } // backupFile
-
+        }
     }
 }
